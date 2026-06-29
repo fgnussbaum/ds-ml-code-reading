@@ -7,6 +7,7 @@ rem  Add entries as PYTHON_PATH_1, PYTHON_PATH_2, ... (up to 9).
 rem ================================================================
 set PYTHON_PATH_1=C:\WinPython\WPy64-31241\python-3.12.4.amd64\python.exe
 set PYTHON_PATH_2=%USERPROFILE%\AppData\Local\Microsoft\WindowsApps\python3.13.exe
+set PYTHON_PATH_3=%USERPROFILE%\AppData\Roaming\uv\python\cpython-3.14.6-windows-x86_64-none\python.exe
 
 set PYTHON_EXE=
 for /L %%i in (1,1,9) do (
