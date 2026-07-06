@@ -12,6 +12,7 @@ from sklearn.metrics import root_mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+# This import is relative to repo root: needs to be on Python Path
 from cases.utils.regression_helpers import plot_pred_vs_actual, plot_prediction_distributions
 
 PLOT_DIR     = Path(__file__).parent / "plots"
@@ -96,7 +97,8 @@ print(f"Baseline (carat only)  RMSE: ${rmse_base:,.0f}   R²: {r2_base:.3f}")
 Adding quality grades and all dimension features. The improvement over the carat
 baseline shows the incremental value of cut/color/clarity grading.
 Coefficients reveal whether a grade adds or subtracts price relative to its
-dropped reference level (e.g. cut_Good is relative to cut_Fair).
+dropped reference level (e.g. cut_Good is relative to cut_Fair, the dropped
+baseline for the cut column).
 """
 lr_full   = LinearRegression().fit(X_train_s, y_train)
 y_pred    = lr_full.predict(X_test_s)

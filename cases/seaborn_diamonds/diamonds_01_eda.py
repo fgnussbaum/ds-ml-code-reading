@@ -53,7 +53,8 @@ print(f"Saved: {PLOT_DIR / 'diamonds_price_dist.png'}")
 # %%
 """ [4] EDA — correlation heatmap
 carat, x, y, z are near-perfectly collinear (all measure stone size).
-This multicollinearity inflates OLS variance — the core motivation for Ridge.
+This multicollinearity inflates OLS coefficient variance and makes individual
+coefficients unstable, even though overall prediction accuracy is unaffected.
 """
 corr = df[NUMERIC_COLS + ["price"]].corr()
 

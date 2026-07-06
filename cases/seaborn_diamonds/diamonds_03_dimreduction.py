@@ -33,8 +33,7 @@ print(f"Rows after cleanup: {len(df):,}")
 # %%
 """ [3] Feature prep — ordinal encode categoricals, scale all features
 Quality grades carry a meaningful ordering so ordinal encoding (integer rank) is
-appropriate here and keeps the feature matrix compact (9 features vs 23 with OHE),
-making the PCA biplot readable with one arrow per original variable.
+appropriate here and keeps the feature matrix compact (9 features vs 23 with OHE).
 Price is excluded — the goal is to see whether price-relevant structure emerges
 from the quality and size features alone.
 All 9 features are z-scored so PCA variance is not dominated by scale differences
@@ -100,36 +99,7 @@ print(f"r(PC1, log-price): {corr_pc1:.3f}")
 print(f"Saved: {PLOT_DIR / 'diamonds_pca_price.png'}")
 
 # %%
-""" [6] PCA — biplot
-Loading vectors show each feature's contribution to PC1 and PC2.
-Arrow direction = feature axis; length = influence on that component.
-Arrows pointing the same way indicate positively correlated features.
-Arrow scale is set so the longest arrow reaches ~80% of the PC score spread.
-"""
-loadings    = pca.components_[:2].T    # (n_features, 2)
-score_range = min(np.percentile(np.abs(X_pca[:, 0]), 90),
-                  np.percentile(np.abs(X_pca[:, 1]), 90))
-arrow_scale = score_range * 0.8 / np.abs(loadings).max()
-
-fig, ax = plt.subplots(figsize=(8, 7))
-ax.scatter(X_pca[:, 0], X_pca[:, 1], c=log_price, cmap="plasma", alpha=0.15, s=2)
-for i, name in enumerate(ALL_FEATURES):
-    dx, dy = loadings[i] * arrow_scale
-    ax.annotate("", xy=(dx, dy), xytext=(0, 0),
-                arrowprops=dict(arrowstyle="->", color="crimson", lw=1.5))
-    ax.text(dx * 1.12, dy * 1.12, name.replace("_ord", ""), fontsize=8, color="crimson")
-ax.set_xlabel(f"PC1  ({evr[0]:.1%})")
-ax.set_ylabel(f"PC2  ({evr[1]:.1%})")
-ax.set_title("PCA biplot — feature loadings")
-fig.tight_layout()
-fig.savefig(PLOT_DIR / "diamonds_pca_biplot.png")
-plt.show()
-top3 = sorted(zip(ALL_FEATURES, loadings[:, 0]), key=lambda x: abs(x[1]), reverse=True)[:3]
-print("Top PC1 loadings:", "  ".join(f"{n}: {v:.2f}" for n, v in top3))
-print(f"Saved: {PLOT_DIR / 'diamonds_pca_biplot.png'}")
-
-# %%
-""" [7] t-SNE — subsample and fit
+""" [6] t-SNE — subsample and fit
 t-SNE preserves local neighbourhood distances and can reveal non-linear cluster
 structure that PCA (linear) misses.
 A random subsample of TSNE_SAMPLE rows keeps runtime manageable; the fixed seed
@@ -147,7 +117,7 @@ X_tsne = TSNE(n_components=2, perplexity=30, random_state=RANDOM_STATE).fit_tran
 print("Done.")
 
 # %%
-""" [8] t-SNE — coloured by price
+""" [7] t-SNE — coloured by price
 Compare to the PCA price scatter: if the gradient is similarly aligned, PCA
 already captures the price-relevant structure and t-SNE adds little.
 Tighter clusters within the price gradient would indicate finer-grained structure
@@ -167,7 +137,7 @@ print(f"r(t-SNE 1, log-price): {corr_t1:.3f}")
 print(f"Saved: {PLOT_DIR / 'diamonds_tsne_price.png'}")
 
 # %%
-""" [9] t-SNE — coloured by cut grade
+""" [8] t-SNE — coloured by cut grade
 Discrete colour-coding by cut grade reveals whether cut is a visible structural
 axis in the feature space. If cut grades mix throughout the embedding rather than
 forming clean clusters, cut alone is a weak direct signal — consistent with the

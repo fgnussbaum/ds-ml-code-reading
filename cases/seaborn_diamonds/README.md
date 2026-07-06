@@ -42,7 +42,7 @@ Each row is one diamond listed by a retailer. The four "Cs" (carat, cut, color, 
 ## What You Can Learn Here
 
 - Right-skewed targets and when to apply log transformations before or after modeling
-- Multicollinearity among carat and the three physical dimensions (x, y, z), and how Ridge regression addresses inflated coefficient variance
+- Multicollinearity among carat and the three physical dimensions (x, y, z), and how PCA collapses them onto a single dominant component (see `diamonds_03_dimreduction.py`)
 - Ordinal encoding trade-offs for quality grades (cut, color, clarity) vs. one-hot encoding with drop_first
 - The price paradox as a concrete example of confounding: naive groupby comparisons can reverse apparent effects
 
@@ -57,15 +57,21 @@ Each row is one diamond listed by a retailer. The four "Cs" (carat, cut, color, 
 **Modeling**
 1. Predict diamond price from carat alone using linear regression; evaluate RMSE and R2.
 2. Add cut, color, and clarity as one-hot encoded features; quantify the improvement and inspect coefficients for the quality grades.
-3. Apply Ridge and Lasso regression to handle multicollinearity; use a validation set to select the regularisation strength alpha and compare coefficient paths for both methods.
-4. Compare OLS, Ridge, and Lasso on a held-out test set; identify which features Lasso drives to zero and whether the zeroed features are the redundant dimension columns.
+3. Compare the carat-only baseline to the full model: how much does adding categorical grading information reduce RMSE, and which coefficients dominate?
+4. Diagnose the full model's predicted-vs-actual and prediction-distribution plots: where does it break down (impossible negative prices, heteroscedasticity at high prices), and why?
+
+**Dimension Reduction**
+1. Encode cut, color, and clarity ordinally instead of one-hot; how does the resulting feature matrix compare to the regression script's?
+2. How much variance does the first principal component explain, and why does that follow from the multicollinearity seen in the EDA?
+3. Does an unsupervised PCA/t-SNE projection, fit without ever using price, still align with price? What does that tell you about the dataset?
 
 ---
 
 ## Available Scripts
 
 - `diamonds_01_eda.py`: price distribution, log transform, correlation heatmap, price by category, carat scatter
-- `diamonds_02_ridge_lasso.py`: OLS baseline, Ridge, Lasso, alpha grid search, coefficient paths, test evaluation
+- `diamonds_02_regression.py`: carat-only baseline vs. full one-hot model, coefficient interpretation, prediction diagnostics
+- `diamonds_03_dimreduction.py`: ordinal encoding, PCA variance and price-colored scatter, t-SNE colored by price and cut
 
 **General intent of scripts:** regression, dimension reduction
 

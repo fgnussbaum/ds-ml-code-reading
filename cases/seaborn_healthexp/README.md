@@ -54,7 +54,8 @@ Health economists and policymakers use data like this to evaluate whether higher
 
 ## Available Scripts
 
-- `healthexp_01_linreg.py`: linear regression, OLS normal equation, standardization, one-hot encoding, permutation importance, standardized coefficients, residual analysis
+- `healthexp_01_eda.py`: spending and life expectancy trends by country, pooled vs. within-country correlation, USA divergence from peer median
+- `healthexp_02_linreg.py`: linear regression, OLS normal equation, standardization, one-hot encoding, permutation importance, standardized coefficients, residual analysis
 
 **General intent of scripts:** regression
 

@@ -14,6 +14,7 @@ Suggested dataset sequence:
 1. [Tips: Restaurant Tipping Behavior](#tips-restaurant-tipping-behavior)
 2. [Penguins: Palmer Penguins Morphology](#penguins-palmer-penguins-morphology)
 3. [MPG: Automobile Fuel Efficiency](#mpg-automobile-fuel-efficiency)
+4. [Diamonds: Diamond Prices and Quality Grades](#diamonds-diamond-prices-and-quality-grades)
 
 > **Questions for datasets not listed here are not yet finalized.**
 
@@ -61,6 +62,18 @@ Questions for this dataset are in [cases/seaborn_mpg/QUESTIONS.md](../cases/seab
 
 ---
 
+### Diamonds: Diamond Prices and Quality Grades
+
+*53,940 diamonds graded on the four Cs (carat, cut, color, clarity): a large, highly collinear dataset that pairs a classic confounding puzzle (the cut-price paradox) with a look at how PCA and t-SNE recover price-relevant structure without ever seeing price.*
+
+Questions for this dataset are in [cases/seaborn_diamonds/QUESTIONS.md](../cases/seaborn_diamonds/QUESTIONS.md).
+
+- [diamonds_01_eda.py](../cases/seaborn_diamonds/diamonds_01_eda.py): price distribution, correlation heatmap, cut-price paradox, carat-price scatter
+- [diamonds_02_regression.py](../cases/seaborn_diamonds/diamonds_02_regression.py): carat-only baseline vs. full one-hot model, leakage-safe scaling, coefficient interpretation, prediction diagnostics
+- [diamonds_03_dimreduction.py](../cases/seaborn_diamonds/diamonds_03_dimreduction.py): ordinal encoding, PCA variance and price-colored scatter, t-SNE colored by price and cut
+
+---
+
 ## Topic Reference
 
 Quick lookup by course topics.
@@ -71,6 +84,7 @@ Quick lookup by course topics.
 - [tips_01_eda.py](../cases/seaborn_tips/tips_01_eda.py): engineered target, categorical breakdown
 - [mpg_01_eda.py](../cases/seaborn_mpg/mpg_01_eda.py): numeric distributions, suppressor effect
 - [penguins_01_eda.py](../cases/seaborn_penguins/penguins_01_eda.py): cluster structure, species confound
+- [diamonds_01_eda.py](../cases/seaborn_diamonds/diamonds_01_eda.py): multicollinear size features, cut-price confounding
 
 ### Data Preparation
 *Course alignment: Part IV · Data Preparation*
@@ -83,6 +97,7 @@ Quick lookup by course topics.
 
 - [tips_02_single_feature.py](../cases/seaborn_tips/tips_02_single_feature.py): GD from scratch
 - [healthexp_01_linreg.py](../cases/seaborn_healthexp/healthexp_01_linreg.py): OLS with fixed effects
+- [diamonds_02_regression.py](../cases/seaborn_diamonds/diamonds_02_regression.py): single- vs. multi-feature OLS baseline comparison
 
 ### Overfitting and Bias-Variance
 *Course alignment: Part V · Underfitting and Overfitting*
@@ -96,7 +111,6 @@ Quick lookup by course topics.
 
 - [tips_03_all_features.py](../cases/seaborn_tips/tips_03_all_features.py): encoding + OLS baseline
 - [mpg_02_ridge_lasso.py](../cases/seaborn_mpg/mpg_02_ridge_lasso.py): high-multicollinearity case
-- [diamonds_02_ridge_lasso.py](../cases/seaborn_diamonds/diamonds_02_ridge_lasso.py): large-scale comparison
 
 ### Classification, Decision Trees, Random Forests
 *Course alignment: Part V · Classification Tasks, Decision Trees, Random Forests*
